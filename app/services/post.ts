@@ -12,32 +12,36 @@ export type Post = {
   updatedAt: string;
 };
 
-let postsCache: Post[] = [];
+const postMap: Map<string, Post> = new Map<string, Post>();
+let postListCache: Post[] = [];
 
 export const getPosts = async () => {
-  if (postsCache.length == 0) {
+  if (postMap.size == 0) {
     await repopulatePostsCache();
   }
 
-  return postsCache.map((row: Post) => ({ id: row.id, title: row.title }));
+  return postListCache.map((row: Post) => ({ id: row.id, title: row.title }));
 };
 
 const repopulatePostsCache = async () => {
   try {
     const [rows, _] = await conn.execute("select * from posts");
 
-    postsCache = rows;
+    rows.forEach((post: Post) => {
+      postMap.set(post.id, post);
+      postListCache.push(post);
+    });
   } catch {
     console.log("DB query failed!!");
   }
 };
 
 export async function getPost(id: string) {
-  if (postsCache.length == 0) {
+  if (postMap.size == 0) {
     await repopulatePostsCache();
   }
 
-  const post = postsCache.find((post) => post.id == id);
+  const post = postMap.get(id);
 
   invariant(!!post?.content, "Cannot find post content");
 
