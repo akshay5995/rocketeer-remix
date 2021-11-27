@@ -1,65 +1,49 @@
-import path from "path";
-import fs from "fs/promises";
-import parseFrontMatter from "front-matter";
 import invariant from "tiny-invariant";
 import { marked } from "marked";
-
-const postsPath = path.join(__dirname, "..", "posts");
+const { PSDB } = require("planetscale-node");
+const conn = new PSDB("main");
 
 export type Post = {
-  slug: string;
-  title: string;
-};
-
-export type PostMarkdownAttributes = {
+  id: string;
   title: string;
   description: string;
-  date: string;
+  content?: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
-function isValidPostAttributes(
-  attributes: any
-): attributes is PostMarkdownAttributes {
-  return attributes?.title && attributes?.description && attributes?.date;
-}
+let postsCache: Post[] = [];
 
 export const getPosts = async () => {
-  const dir = await fs.readdir(postsPath);
+  if (postsCache.length == 0) {
+    await repopulatePostsCache();
+  }
 
-  return Promise.all(
-    dir.map(async (filename) => {
-      const file = await fs.readFile(path.join(postsPath, filename));
-
-      const { attributes } = parseFrontMatter<PostMarkdownAttributes>(
-        file.toString()
-      );
-
-      invariant(
-        isValidPostAttributes(attributes),
-        `${filename} has bad meta data!`
-      );
-
-      return {
-        slug: filename.replace(/\.md$/, ""),
-        title: attributes.title,
-      };
-    })
-  );
+  return postsCache.map((row: Post) => ({ id: row.id, title: row.title }));
 };
 
-export async function getPost(slug: string) {
-  const filepath = path.join(postsPath, slug + ".md");
+const repopulatePostsCache = async () => {
+  try {
+    const [rows, _] = await conn.execute("select * from posts");
 
-  const file = await fs.readFile(filepath);
+    postsCache = rows;
+  } catch {
+    console.log("DB query failed!!");
+  }
+};
 
-  const { attributes, body } = parseFrontMatter(file.toString());
+export async function getPost(id: string) {
+  if (postsCache.length == 0) {
+    await repopulatePostsCache();
+  }
 
-  invariant(
-    isValidPostAttributes(attributes),
-    `Post ${filepath} is missing attributes`
-  );
+  const post = postsCache.find((post) => post.id == id);
 
-  const html = marked(body);
+  invariant(!!post?.content, "Cannot find post content");
 
-  return { slug, title: attributes.title, html };
+  const buff = Buffer.from(post?.content, "base64");
+  const text = buff.toString("ascii");
+  const html = marked(text);
+
+  return { id: post?.id, title: post?.title, html: html };
 }
