@@ -9,6 +9,7 @@ import {
   ScrollRestoration,
   useCatch,
   useLocation,
+  useLoaderData,
 } from "remix";
 import type { LinksFunction } from "remix";
 
@@ -51,6 +52,14 @@ export default function App() {
   );
 }
 
+export function loader() {
+  return {
+    ENV: {
+      GOOGLE_ANALYTICS: process.env.GOOGLE_ANALYTICS,
+    },
+  };
+}
+
 function Document({
   children,
   title,
@@ -58,9 +67,28 @@ function Document({
   children: React.ReactNode;
   title?: string;
 }) {
+  const data = useLoaderData();
+
   return (
     <html lang="en">
       <head>
+        {/* Global Site Tag (gtag.js) - Google Analytics */}
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${data.ENV.GOOGLE_ANALYTICS}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${data.ENV.GOOGLE_ANALYTICS}', {
+              page_path: window.location.pathname,
+            });
+          `,
+          }}
+        />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         {title ? <title>{title}</title> : null}
