@@ -127,7 +127,10 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
                 </NavLink>
               </li>
               <li>
-                <a href="https://github.com/akshay5995" target="_blank">
+                <a
+                  href="https://github.com/akshay5995"
+                  rel="noopener noreferrer"
+                >
                   GitHub
                 </a>
               </li>
