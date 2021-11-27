@@ -10,6 +10,7 @@ import {
   useCatch,
   useLocation,
   useLoaderData,
+  NavLink,
 } from "remix";
 import type { LinksFunction } from "remix";
 
@@ -121,7 +122,9 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
           <nav aria-label="Main navigation" className="remix-app__header-nav">
             <ul>
               <li>
-                <Link to="/posts">Posts</Link>
+                <NavLink prefetch="intent" to="/posts">
+                  Posts
+                </NavLink>
               </li>
               <li>
                 <a href="https://github.com/akshay5995" target="_blank">
@@ -168,28 +171,42 @@ export function CatchBoundary() {
   }
 
   return (
-    <Document title={`${caught.status} ${caught.statusText}`}>
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>ERROR!!</title>
+        <Meta />
+        <Links />
+      </head>
       <Layout>
         <h1>
           {caught.status}: {caught.statusText}
         </h1>
         {message}
       </Layout>
-    </Document>
+    </html>
   );
 }
 
 export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error);
   return (
-    <Document title="Error!">
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>ERROR!!</title>
+        <Meta />
+        <Links />
+      </head>
       <Layout>
         <div>
           <h1>There was an error</h1>
           <p>{error.message}</p>
         </div>
       </Layout>
-    </Document>
+    </html>
   );
 }
 
