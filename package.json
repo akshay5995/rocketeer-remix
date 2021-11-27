@@ -6,6 +6,7 @@
   "scripts": {
     "build": "remix build",
     "dev": "remix watch",
+    "postinstall": "remix setup node",
     "start": "vercel dev"
   },
   "dependencies": {
