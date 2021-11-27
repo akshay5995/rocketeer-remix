@@ -1,8 +1,15 @@
-import { useLoaderData, Link } from "remix";
+import { useLoaderData, Link, MetaFunction } from "remix";
 import { getPosts } from "~/services/post";
 import type { Post } from "~/services/post";
 
 export const loader = () => getPosts();
+
+export let meta: MetaFunction = () => {
+  return {
+    title: "Posts",
+    description: "Posts of Rocketeer",
+  };
+};
 
 export default function Posts() {
   const posts = useLoaderData<Post[]>();
