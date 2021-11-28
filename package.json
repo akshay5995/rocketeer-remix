@@ -1,8 +1,11 @@
 {
   "private": true,
   "name": "rocketeer-remix",
-  "description": "",
-  "license": "",
+  "description": "Personal site build with Remix",
+  "license": "MIT",
+  "author": {
+    "name": "Akshay Ram Vignesh"
+  },
   "scripts": {
     "build": "remix build",
     "dev": "remix watch",
