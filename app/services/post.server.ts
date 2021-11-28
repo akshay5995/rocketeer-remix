@@ -17,16 +17,10 @@ interface Post extends Omit<PostMeta, "description"> {
   html: string;
 }
 
-const postMap: Map<string, PostRow> = new Map<string, PostRow>();
-
-let postListCache: PostRow[] = [];
-
 export const getPosts = async (): Promise<PostMeta[]> => {
-  if (postMap.size == 0) {
-    await repopulatePostsCache();
-  }
+  const [rows, _] = await db.execute("select * from posts", []);
 
-  return postListCache.map(
+  return rows.map(
     (row: PostRow): PostMeta => ({
       id: row.id,
       title: row.title,
@@ -36,29 +30,16 @@ export const getPosts = async (): Promise<PostMeta[]> => {
   );
 };
 
-const repopulatePostsCache = async () => {
-  try {
-    const [rows, _] = await db.execute("select * from posts", []);
-
-    rows.forEach((post: PostRow) => {
-      postMap.set(post.id, post);
-      postListCache.push(post);
-    });
-  } catch {
-    console.log("DB query failed!!");
-  }
-};
-
 export const getPost = async (id: string): Promise<Post> => {
-  if (postMap.size == 0) {
-    await repopulatePostsCache();
-  }
+  const [rows, _] = await db.execute("select * from posts where id = ?", [id]);
 
-  const post = postMap.get(id);
+  invariant(!!rows.length, "Cannot find post");
 
-  invariant(!!post?.content, "Cannot find post content");
+  const post: PostRow = rows[0];
 
-  const html = markDownToHtml(decodeFromBase64(post.content));
+  const html = post?.content
+    ? markDownToHtml(decodeFromBase64(post?.content))
+    : "";
 
   return {
     id: post?.id,
