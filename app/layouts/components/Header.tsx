@@ -1,4 +1,10 @@
-import { Header as StyledHeader, Text, Title, Group } from "@mantine/core";
+import {
+  Header as StyledHeader,
+  Text,
+  Title,
+  Group,
+  ThemeIcon,
+} from "@mantine/core";
 import { Link } from "remix";
 
 export function Header() {
