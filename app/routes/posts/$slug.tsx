@@ -2,6 +2,7 @@ import { useLoaderData } from "remix";
 import type { LoaderFunction, MetaFunction } from "remix";
 import { getPost } from "~/services/post.server";
 import invariant from "tiny-invariant";
+import { Container, Title, Text } from "@mantine/core";
 
 export const loader: LoaderFunction = async ({ params }) => {
   invariant(params.slug, "expected params.slug");
@@ -18,9 +19,17 @@ export default function PostSlug() {
   const post = useLoaderData();
 
   return (
-    <div>
-      <h1>{post.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: post.html }} />
-    </div>
+    <Container>
+      <Title order={2}>
+        <Text
+          gradient={{ from: "green", to: "cyan", deg: 2 }}
+          variant="gradient"
+          inherit
+        >
+          {post.title}
+        </Text>
+      </Title>
+      <Container dangerouslySetInnerHTML={{ __html: post.html }} />
+    </Container>
   );
 }
