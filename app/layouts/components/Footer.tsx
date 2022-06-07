@@ -5,7 +5,7 @@ import {
   Group,
   Center,
 } from "@mantine/core";
-import { BrandGithub, BrandLinkedin } from "tabler-icons-react";
+import { BrandGithub, BrandLinkedin, BrandTwitter } from "tabler-icons-react";
 
 export function Footer() {
   return (
@@ -20,7 +20,7 @@ export function Footer() {
             <ThemeIcon
               size="lg"
               variant="gradient"
-              gradient={{ from: "indigo", to: "cyan" }}
+              gradient={{ from: "black", to: "grey" }}
             >
               <BrandGithub size={20} />
             </ThemeIcon>
@@ -33,9 +33,22 @@ export function Footer() {
             <ThemeIcon
               size="lg"
               variant="gradient"
-              gradient={{ from: "cyan", to: "green" }}
+              gradient={{ from: "blue", to: "grey" }}
             >
               <BrandLinkedin size={20} />
+            </ThemeIcon>
+          </Anchor>
+          <Anchor
+            href="https://twitter.com/akshay5995"
+            target="_blank"
+            referrerPolicy="no-referrer"
+          >
+            <ThemeIcon
+              size="lg"
+              variant="gradient"
+              gradient={{ from: "blue", to: "cyan" }}
+            >
+              <BrandTwitter size={20} />
             </ThemeIcon>
           </Anchor>
         </Group>
