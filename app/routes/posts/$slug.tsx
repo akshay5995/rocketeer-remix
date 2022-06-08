@@ -29,7 +29,10 @@ export default function PostSlug() {
           {post.title}
         </Text>
       </Title>
-      <Container dangerouslySetInnerHTML={{ __html: post.html }} />
+      <Container
+        className="content"
+        dangerouslySetInnerHTML={{ __html: post.html }}
+      />
     </Container>
   );
 }

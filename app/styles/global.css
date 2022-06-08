@@ -63,3 +63,7 @@ pre, code {
     word-wrap: break-word;
     overflow: auto;
 }
+
+.content img {
+  width: 100%;
+}
