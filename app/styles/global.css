@@ -51,17 +51,30 @@ a:hover {
 }
 
 body {
-  background:#eee;
-  padding:0;
-  margin:0;
+  background: #eee;
+  padding: 0;
+  margin: 0;
 }
 
 
-pre, code {
-    background: #333;
-    white-space: pre;
-    word-wrap: break-word;
-    overflow: auto;
+code[class*=language-],
+pre[class*=language-] {
+  font-family: Consolas, monospace;
+  font-size: 1em;
+  text-align: left;
+  text-shadow: 0 -.1em .2em #000;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
 }
 
 .content img {

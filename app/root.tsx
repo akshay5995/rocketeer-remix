@@ -1,14 +1,14 @@
 import * as React from "react";
+import type { LinksFunction } from "@remix-run/node";
 import {
   Links,
-  LinksFunction,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
   useLoaderData,
-} from "remix";
+} from "@remix-run/react";
 import { Layout } from "./layouts/AppLayout";
 import globalStylesUrl from "~/styles/global.css";
 

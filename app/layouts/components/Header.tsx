@@ -1,11 +1,5 @@
-import {
-  Header as StyledHeader,
-  Text,
-  Title,
-  Group,
-  ThemeIcon,
-} from "@mantine/core";
-import { Link } from "remix";
+import { Header as StyledHeader, Text, Title, Group } from "@mantine/core";
+import { Link } from "@remix-run/react";
 
 export function Header() {
   return (

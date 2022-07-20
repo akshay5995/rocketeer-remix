@@ -1,8 +1,9 @@
-import { useLoaderData } from "remix";
-import type { LoaderFunction, MetaFunction } from "remix";
+import { useLoaderData } from "@remix-run/react";
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { getPost } from "~/services/post.server";
 import invariant from "tiny-invariant";
 import { Container, Title, Text } from "@mantine/core";
+import hjs from "highlight.js";
 
 export const loader: LoaderFunction = async ({ params }) => {
   invariant(params.slug, "expected params.slug");

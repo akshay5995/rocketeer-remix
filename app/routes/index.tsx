@@ -1,5 +1,6 @@
 import { Blockquote, Title, Text, Mark } from "@mantine/core";
-import type { MetaFunction } from "remix";
+import type { MetaFunction } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 
 export let meta: MetaFunction = () => {
   return {
@@ -9,6 +10,7 @@ export let meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  const data = useLoaderData();
   return (
     <div className="remix__page">
       <main>
