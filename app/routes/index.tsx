@@ -13,7 +13,7 @@ import { useLoaderData } from "@remix-run/react";
 export let meta: MetaFunction = () => {
   return {
     title: "Rocketeer.dev",
-    description: "Welcome to Rocketeer.dev!",
+    description: "Akshay's personal site",
   };
 };
 
@@ -55,8 +55,7 @@ export default function Index() {
             />
           </Group>
           <Title order={2}>
-            I'm <Mark>Akshay,</Mark> Currently @glovo as a Software Engineer.(Ex
-            @agoda)
+            I'm <Mark>Akshay</Mark>
           </Title>
           <Text weight={700}>
             I love building things (🚀 🚀 🚀), dogs (🐶 🐶) and football (⚽).
