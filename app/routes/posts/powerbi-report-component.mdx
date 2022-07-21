@@ -1,0 +1,370 @@
+---
+meta:
+  title: How To Embed Microsoft Power BI Charts Into Your React Application
+  description: Embedding Microsoft Power BI charts into your React Application can be breeze with the right tools.
+headers:
+  Cache-Control: no-cache
+---
+
+import { Header } from "./components/Header";
+
+<Header title={meta.title} />
+
+> _Note: This article is updated for the latest release of the package_ **_≥2.0.0_**
+
+Embedding Microsoft Power BI charts into your React Application can be breeze with the right tools. Be it Report, Dashboard or a Tile.
+
+This article assumes you have a fairly decent idea about Microsoft Power BI and few related terminologies.
+
+# TL;DR
+
+If you're using _npm_
+
+```
+npm i powerbi-report-component
+```
+
+or _yarn_
+
+```
+yarn add powerbi-report-component
+```
+
+Basic usage for Report, Dashboard or Tile.
+
+```jsx
+import { Report } from "powerbi-report-component";
+
+<Report
+  tokenType="Embed" // or, "Aad"
+  accessToken="" // accessToken goes here
+  embedUrl="" // embedUrl goes here
+  embedId="" // report or dashboard Id goes here
+  pageName="" // set as current page of the report
+  reportMode="view" // options: view/edit/create
+  permissions="All" // View
+  style={reportStyle}
+/>;
+
+import { Dashboard } from "powerbi-report-component";
+
+<Dashboard
+  tokenType={tokenType}
+  accessToken={accessToken}
+  embedUrl={embedUrl}
+  embedId={embedId}
+  style={dashboardStyle}
+  pageView="fitToWidth" // 'oneColumn', 'actualSize'
+/>;
+
+import { Tile } from "powerbi-report-component";
+
+<Tile
+  tokenType={tokenType}
+  accessToken={accessToken}
+  embedUrl={embedUrl}
+  embedId={embedId}
+  dashboardId={dashboardId}
+  style={tileStyle}
+/>;
+```
+
+> Note: I’d like to have some of you as collaborators to improve and maintain it.Raise a PR anytime.
+
+# Now, for the those who stayed :)
+
+Embedding a Power BI report into your React Application can be a pain for a beginner. Even though the Microsoft’s documentation on the topic is pretty neat.
+
+I’m just gonna tell you what’s need from a React developer’s perspective and not go into the details of implementation or architecture.
+
+There are two approaches that you can take to embed your Power BI Report:
+
+1.  User Owns Data
+2.  App Owns Data
+
+**The main difference is:**
+
+- **User Owns Data** sample is for
+  [Embedding for your organisation](https://powerbi.microsoft.com/en-us/documentation/powerbi-developer-embedding/), the embedded reports readers can be Power BI Pro or free users in your organisation. Users have to log-in with their PBI account. [**Power BI Premium**](https://powerbi.microsoft.com/en-us/documentation/powerbi-premium/) license is required. (i.e, Users who are part of your AD)
+- **App Owns Data** sample is for
+  [Embedding for your customers](https://powerbi.microsoft.com/en-us/documentation/powerbi-developer-embedding/), the embedded report readers can be your own customers(say you’re an ISV application provider). So no log-in. [**Power BI Embedded**](https://powerbi.microsoft.com/en-us/blog/power-bi-embedded-capacity-based-skus-coming-to-azure/) license is required.(i.e, Users outside your AD)
+
+Source: [App-vs-User-Owns-Data](https://community.powerbi.com/t5/Developer/App-vs-User-Owns-Data/td-p/300729)
+
+You have to choose who will be using your application that’s gonna contain your embedded report i.e, Internal users(AD User) vs. External users(Non AD).
+
+Now that you’ve decided on which approach you’re gonna choose.
+
+Hopefully, You have your report ready and are able to view it in [https://powerbi.microsoft.com](https://powerbi.microsoft.com/).
+
+Now, navigate to your report under your workspaces your URL should look something like this:
+
+https://app.powerbi.com/groups/workspace-id/reports/report-id
+
+for dashboards you might have something like this:
+
+https://app.powerbi.com/groups/workspace-iddashboards/dashboard-id
+
+**Report ID**: from the URL. 👆
+
+**Workspace ID**: also, from the URL. 👆
+
+**Token**: AAD or Embed Token (To authenticate the person accessing the report)
+
+_Note: AAD token is used while taking the_ **_User Owns Data_** _Approach and Embed token is used when taking_ **_App Owns Data_** _Approach._
+
+_I'll talk about ways to generate AAD and Embed token in my next article._
+
+**Embed Url**: (Will consist of Report ID and Workspace ID)
+
+https://app.powerbi.com/reportEmbed?reportId=report-id&groupId=group-id
+
+There are mainly two ways you can proceed with embedding the report into your react application.
+
+1.  Using an iframe
+2.  Using Power BI JS API provided by Microsoft
+
+Using an iframe is pretty straightforward but, this doesn’t provide the flexibility that a React component would provide, like callbacks or event triggers.
+
+Embedding iframe would something like this:
+
+```html
+<iframe
+  width=”800"
+  height=”600"
+  src=”http://myserver/reports/powerbi/Sales?rs:embed=true"
+  allowFullScreen=”true”>
+</iframe>
+```
+
+But, naturally as Javascript developers we tend to go with the more flexible JS API.
+
+You can take a look at Microsoft’s official page:
+
+> [https://microsoft.github.io/PowerBI-JavaScript/demo/v2-demo/index.html#](https://microsoft.github.io/PowerBI-JavaScript/demo/v2-demo/index.html#)
+
+They have a very clear explanation and demo in Vanilla JS which uses their Javascript API.
+
+> [https://microsoft.github.io/PowerBI-JavaScript/demo/v2-demo/index.html#](https://microsoft.github.io/PowerBI-JavaScript/demo/v2-demo/index.html#)
+
+You might be wondering, the demo is in Vanilla JS so if I have to make it a React Component and use it in my app.hmm, that might take a while 🤔
+
+> powerbi-report-component to the rescue! ✨
+
+_Check it out_ [https://www.npmjs.com/package/powerbi-report-component](https://www.npmjs.com/package/powerbi-report-component). (_It’s fairly easy to use :) )_
+
+Install the package using:
+
+```
+npm i powerbi-report-component
+or,
+yarn add powerbi-report-component
+```
+
+Usage for Report,
+
+```jsx
+import { Report } from "powerbi-report-component";
+
+<Report
+  tokenType="Embed" // or "Aad"
+  accessToken="" // accessToken goes here
+  embedUrl="" // embedUrl goes here
+  embedId="" // Report or Dashboard ID goes here
+  permissions="All" // or "View"
+  style={myStyleObject}
+/>;
+```
+
+**Currently supported features**:
+
+1.  Custom styling by passing style to your embedded report component.
+2.  The component also lets you pass callbacks to trigger on events like:
+
+- Page Change
+
+```
+onPageChange={(data) =>
+  console.log(\`Page name :{data.newPage.displayName}\`)
+}
+```
+
+- Load
+
+```
+onLoad={(report) => {
+      console.log('Report Loaded!');
+      this.report = report;
+// Read docs to know how to use the report object that is returned
+    }
+}
+```
+
+- Data Element Clicked
+
+```
+onSelectData={(data) =>
+  console.log(\`You clicked on chart: {data.visual.title}\`)
+}
+```
+
+3\. Use ‘report’ object returned to parent component for:
+
+- Fullscreen
+
+```
+setFullscreen = () => this.report.fullscreen()
+```
+
+- Print Report
+
+```
+printReport = () => this.report.print();
+```
+
+- Change Mode
+
+```
+//mode can be "view" or "edit"
+
+ changeMode = (mode) => this.report.switchMode(mode);
+```
+
+- Show or Hide Visual Headers
+
+```
+toggleAllVisualHeaders = (bool) =>
+{
+  const newSettings = {
+    visualSettings: {
+      visualHeaders: \[
+        {
+          settings: {
+            visible: bool
+          }
+        }
+      \]
+    }
+  }; this.report.updateSettings(newSettings)
+    .then(function () {
+      console.log(\`Visual header was toggled to {bool}\`);
+    })
+    .catch(function (errors) {
+      console.log(errors);
+    });
+}
+```
+
+- Set Filters
+
+```
+ //example filter object from Microsoft's demo page
+
+    const filter = {
+      $schema: "http://powerbi.com/product/schema#basic",
+      target: {
+        table: "Store",
+        column: "Chain"
+      },
+      operator: "In",
+      values: \["Lindseys"\]
+    };
+
+    // using event handlers
+
+    setFilter = (filter) =>
+    this.report.setFilters(\[filter\]).catch(function (errors) {
+        console.log(errors);
+    });
+
+    // during load of report
+
+    onLoad = (report) => {
+      report.setFilters(\[filter\]).catch(function (errors) {
+        console.log(errors);
+      });
+      this.report = report;
+    }
+  }
+```
+
+- Get Filters
+
+```
+getFilter = () =>
+    this.report.getFilters().then(function (filters) {
+        console.log(filters);
+    }).catch(function (errors) {
+        console.log(errors);
+    });
+```
+
+- Remove Filters
+
+```
+removeFilters = () =>
+  this.report.removeFilters()
+    .catch(function (errors) {
+        console.log(errors);
+  });
+```
+
+- Save edited report when in “edit” or “create” mode.
+
+```
+async saveReport() {
+if (this.report) {
+ try{
+    await this.report.save();
+  } catch (err) {
+    console.log("Error saving report", err);
+  }
+ }
+}
+```
+
+Usage for Dashboard,
+
+```
+import { Dashboard } from 'powerbi-report-component';
+
+<Dashboard
+  tokenType={tokenType}
+  accessToken={accessToken}
+  embedUrl={embedUrl}
+  embedId={embedId}
+  style={dashboardStyle}
+  pageView="fitToWidth" // 'oneColumn', 'actualSize'
+/>
+```
+
+Usage for Tile,
+
+```
+import { Tile} from 'powerbi-report-component';
+
+<Tile
+  tokenType={tokenType}
+  accessToken={accessToken}
+  embedUrl={embedUrl}
+  embedId={embedId}
+  dashboardId={dashboardId}
+  style={tileStyle}
+/>
+```
+
+Please go over to [**_README_**](https://github.com/akshay5995/powerbi-report-component) in Github for more information.
+
+**Links**:
+
+Demo _site_: [http://akshay5995.github.io/powerbi-report-component](http://akshay5995.github.io/powerbi-report-component)
+
+GitHub: [https://github.com/akshay5995/powerbi-report-component](https://github.com/akshay5995/powerbi-report-component)
+
+**_Sources I found very helpful_**:
+
+## Microsoft/PowerBI-JavaScript
+
+[https://microsoft.github.io/PowerBI-JavaScript/demo/v2-demo/index.html#](https://microsoft.github.io/PowerBI-JavaScript/demo/v2-demo/index.html#)
+
+**_I would love to hear your thoughts and feedback (also any request for new features at_** [**_https://github.com/akshay5995/powerbi-report-component/issues_**](https://github.com/akshay5995/powerbi-report-component/issues)**_)._**
