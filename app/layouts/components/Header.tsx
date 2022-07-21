@@ -5,20 +5,20 @@ export function Header() {
   return (
     <StyledHeader height={60} p="xs">
       <Group spacing={"lg"}>
-        <Link to="/">
-          <Title order={1}>
-            <Text
-              gradient={{ from: "indigo", to: "cyan", deg: 10 }}
-              variant="gradient"
-              inherit
-              weight={900}
-            >
-              Rocketeer
-            </Text>
-          </Title>
-        </Link>
-        <Text variant="link" weight={900}>
-          <Link to="posts">Posts</Link>
+        <Title order={1}>
+          <Text
+            component={Link}
+            gradient={{ from: "indigo", to: "cyan", deg: 10 }}
+            variant="gradient"
+            inherit
+            weight={900}
+            to="/"
+          >
+            Rocketeer
+          </Text>
+        </Title>
+        <Text variant="link" component={Link} weight={900} to="posts">
+          Posts
         </Text>
       </Group>
     </StyledHeader>

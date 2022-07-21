@@ -50,7 +50,14 @@ export default function Posts() {
       >
         {posts.map((post: any) => (
           <List.Item key={post.slug}>
-            <Link to={post.slug}>{post.title}</Link>
+            <Text
+              variant="link"
+              component={Link}
+              to={post.slug}
+              weight="initial"
+            >
+              {post.title}
+            </Text>
           </List.Item>
         ))}
       </List>
