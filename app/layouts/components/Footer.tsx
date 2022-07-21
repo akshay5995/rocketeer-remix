@@ -17,11 +17,7 @@ export function Footer() {
             target="_blank"
             referrerPolicy="no-referrer"
           >
-            <ThemeIcon
-              size="lg"
-              variant="gradient"
-              gradient={{ from: "black", to: "grey" }}
-            >
+            <ThemeIcon size="lg" variant="outline" radius="xl" color="teal">
               <BrandGithub size={20} />
             </ThemeIcon>
           </Anchor>
@@ -30,11 +26,7 @@ export function Footer() {
             target="_blank"
             referrerPolicy="no-referrer"
           >
-            <ThemeIcon
-              size="lg"
-              variant="gradient"
-              gradient={{ from: "blue", to: "grey" }}
-            >
+            <ThemeIcon size="lg" variant="outline" radius="xl" color="teal">
               <BrandLinkedin size={20} />
             </ThemeIcon>
           </Anchor>
@@ -43,11 +35,7 @@ export function Footer() {
             target="_blank"
             referrerPolicy="no-referrer"
           >
-            <ThemeIcon
-              size="lg"
-              variant="gradient"
-              gradient={{ from: "blue", to: "cyan" }}
-            >
+            <ThemeIcon size="lg" radius="xl" color="teal" variant="outline">
               <BrandTwitter size={20} />
             </ThemeIcon>
           </Anchor>
