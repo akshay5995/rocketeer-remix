@@ -12,9 +12,9 @@ interface Props {
 
 export function BreadCrumb({ items }: Props) {
   return (
-    <Breadcrumbs my="md">
+    <Breadcrumbs my="md" separator="→">
       {items.map((item) => (
-        <Link to={item.link} text={item.name} />
+        <Link to={item.link} text={item.name} size="xs" />
       ))}
     </Breadcrumbs>
   );

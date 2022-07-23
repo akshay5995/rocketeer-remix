@@ -8,13 +8,9 @@ headers:
 
 import { Header } from "../../common/Header";
 import { BreadCrumb } from "../../common/BreadCrumb";
+import { Image } from "@mantine/core";
 
-<BreadCrumb
-  items={[
-    { name: "Posts", link: "/posts" },
-    { name: meta.title, link: "#" },
-  ]}
-/>
+<BreadCrumb items={[{ name: "Posts", link: "/posts" }]} />
 
 <Header title={meta.title} />
 
@@ -83,7 +79,11 @@ An object specifies its prototype via the internal property `[[Prototype]]`. The
 
 The `__proto__` property exposes the internal prototype linkage.
 
-![prototypal inheritance example](https://cdn-images-1.medium.com/max/800/0*sacpzj7gNySk-x8O.png)
+<Image
+  radius="md"
+  alt="prototypal inheritance example"
+  src="https://cdn-images-1.medium.com/max/800/0*sacpzj7gNySk-x8O.png"
+/>
 
 _prototype_ vs `__proto__`
 
