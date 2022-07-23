@@ -3,17 +3,16 @@ import { useLoaderData, Link } from "@remix-run/react";
 import { Container, Title, Text, List, ThemeIcon } from "@mantine/core";
 import { LayersLinked } from "tabler-icons-react";
 import { json } from "remix";
-import { postFromModule } from "~/utils/post.server";
-import * as pbi from "./powerbi-report-component.mdx";
-import * as js from "./javascript.mdx";
-import * as useReport from "./use-report.mdx";
+import { getPosts, Post } from "~/models/post.server";
 
-export const loader = () => {
-  return json([
-    postFromModule(pbi),
-    postFromModule(js),
-    postFromModule(useReport),
-  ]);
+type LoaderData = {
+  posts: Awaited<ReturnType<typeof getPosts>>;
+};
+
+export const loader = async () => {
+  return json<LoaderData>({
+    posts: await getPosts(),
+  });
 };
 
 export let meta: MetaFunction = () => {
@@ -24,7 +23,7 @@ export let meta: MetaFunction = () => {
 };
 
 export default function Posts() {
-  const posts = useLoaderData();
+  const { posts } = useLoaderData();
 
   return (
     <Container>
@@ -48,7 +47,7 @@ export default function Posts() {
         center
         withPadding
       >
-        {posts.map((post: any) => (
+        {posts.map((post: Post) => (
           <List.Item key={post.slug}>
             <Text
               variant="link"

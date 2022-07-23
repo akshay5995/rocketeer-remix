@@ -9,6 +9,8 @@ import {
 } from "@mantine/core";
 import type { MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { json } from "remix";
+import { getQuote } from "~/models/quote.server";
 
 export let meta: MetaFunction = () => {
   return {
@@ -17,21 +19,18 @@ export let meta: MetaFunction = () => {
   };
 };
 
-export async function loader() {
-  const res = await fetch("https://api.quotable.io/random");
+type LoaderData = {
+  quote: Awaited<ReturnType<typeof getQuote>>;
+};
 
-  const { author, content } = await res.json();
-
-  return {
-    quote: {
-      author,
-      content,
-    },
-  };
-}
+export const loader = async () => {
+  return json<LoaderData>({
+    quote: await getQuote(),
+  });
+};
 
 export default function Index() {
-  const data = useLoaderData();
+  const { quote } = useLoaderData() as LoaderData;
   return (
     <div className="remix__page">
       <main>
@@ -60,9 +59,7 @@ export default function Index() {
           <Text weight={700}>
             I love building things (🚀 🚀 🚀), dogs (🐶 🐶) and football (⚽).
           </Text>
-          <Blockquote cite={`- ${data.quote.author}`}>
-            {data.quote.content}
-          </Blockquote>
+          <Blockquote cite={`- ${quote.author}`}>{quote.content}</Blockquote>
         </Stack>
       </main>
     </div>

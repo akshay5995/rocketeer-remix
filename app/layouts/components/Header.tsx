@@ -14,14 +14,14 @@ export function Header() {
             weight="bold"
             to="/"
           >
-            Rocketeer
+            Rocketeer.dev
           </Text>
         </Title>
         <Text variant="link" component={Link} weight="bold" to="posts">
           Posts
         </Text>
-        <Text variant="link" component={Link} weight="bold" to="cv">
-          CV
+        <Text variant="link" component={Link} weight="bold" to="about">
+          About
         </Text>
       </Group>
     </StyledHeader>
