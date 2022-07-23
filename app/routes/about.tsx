@@ -1,10 +1,10 @@
 import { Outlet } from "@remix-run/react";
-import { MetaFunction } from "remix";
+import { MetaFunction } from "@remix-run/node";
 
 export let meta: MetaFunction = () => {
   return {
-    title: "CV",
-    description: "CV of Akshay",
+    title: "About",
+    description: "About Akshay",
   };
 };
 

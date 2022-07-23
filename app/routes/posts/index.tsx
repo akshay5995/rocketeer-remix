@@ -2,7 +2,7 @@ import { MetaFunction } from "@remix-run/node";
 import { useLoaderData, Link } from "@remix-run/react";
 import { Container, Title, Text, List, ThemeIcon } from "@mantine/core";
 import { LayersLinked } from "tabler-icons-react";
-import { json } from "remix";
+import { json } from "@remix-run/node";
 import { getPosts, Post } from "~/models/post.server";
 
 type LoaderData = {
