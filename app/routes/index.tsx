@@ -16,6 +16,19 @@ export let meta: MetaFunction = () => {
   return {
     title: "Rocketeer.dev",
     description: "Akshay's personal site",
+    viewport: "width=device-width,initial-scale=1",
+    "og:type": "website",
+    "og:url": "https://rocketeer.dev",
+    "og:title": "Rocketeer.dev",
+    "og:description": "Akshay's personal site",
+    "og:image":
+      "https://pbs.twimg.com/profile_images/1440856408983945224/cbKRxa_-_400x400.jpg",
+    "twitter:card": "summary_large_image",
+    "twitter:url": "https://rocketeer.dev",
+    "twitter:title": "Rocketeer.dev",
+    "twitter:description": "Akshay's personal site",
+    "twitter:image":
+      "https://pbs.twimg.com/profile_images/1440856408983945224/cbKRxa_-_400x400.jpg",
   };
 };
 

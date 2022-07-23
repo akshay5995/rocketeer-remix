@@ -18,7 +18,8 @@ export const loader = async () => {
 export let meta: MetaFunction = () => {
   return {
     title: "Posts",
-    description: "Posts of Rocketeer",
+    description: "Posts by Akshay",
+    viewport: "width=device-width,initial-scale=1",
   };
 };
 
