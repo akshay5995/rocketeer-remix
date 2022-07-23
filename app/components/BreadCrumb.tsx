@@ -12,10 +12,11 @@ interface Props {
 
 export function BreadCrumb({ items }: Props) {
   return (
-    <Breadcrumbs my="md" separator="→">
+    <Breadcrumbs my="md">
       {items.map((item) => (
         <Link to={item.link} text={item.name} size="xs" />
       ))}
+      <Link to={"#"} text={""} size="xs" />
     </Breadcrumbs>
   );
 }

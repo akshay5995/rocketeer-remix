@@ -14,7 +14,7 @@ export function Link({ text, to, size, lineClamp }: Props) {
       variant="link"
       component={RemixLink}
       to={to}
-      weight="initial"
+      weight="bold"
       size={size}
       lineClamp={lineClamp}
     >

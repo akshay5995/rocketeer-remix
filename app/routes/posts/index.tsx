@@ -1,6 +1,6 @@
 import { MetaFunction } from "@remix-run/node";
 import { useLoaderData, Link } from "@remix-run/react";
-import { Container, Title, Text, List, ThemeIcon } from "@mantine/core";
+import { Container, Title, Text, List, ThemeIcon, Paper } from "@mantine/core";
 import { LayersLinked } from "tabler-icons-react";
 import { json } from "@remix-run/node";
 import { getPosts, Post } from "~/models/post.server";
@@ -50,14 +50,19 @@ export default function Posts() {
       >
         {posts.map((post: Post) => (
           <List.Item key={post.slug}>
-            <Text
-              variant="link"
-              component={Link}
-              to={post.slug}
-              weight="initial"
-            >
-              {post.title}
-            </Text>
+            <Paper shadow="xl" radius="xl" p="lg">
+              <Text
+                variant="link"
+                component={Link}
+                to={post.slug}
+                weight="initial"
+              >
+                {post.title}
+              </Text>
+              <Text size="sm" weight="lighter">
+                {post.description}
+              </Text>
+            </Paper>
           </List.Item>
         ))}
       </List>

@@ -1,11 +1,13 @@
 import * as pbi from "../routes/posts/powerbi-report-component.mdx";
 import * as js from "../routes/posts/javascript.mdx";
 import * as useReport from "../routes/posts/use-report.mdx";
+import * as pnpmFilters from "../routes/posts/pnpm-filters.mdx";
 
 interface Meta {
   title: string;
   description: string;
   data: string;
+  published: boolean;
 }
 
 export interface Post extends Meta {
@@ -23,5 +25,12 @@ const postFromModule = (mod: {
 };
 
 export const getPosts = async (): Promise<Post[]> => {
-  return [postFromModule(pbi), postFromModule(js), postFromModule(useReport)];
+  const posts = [
+    postFromModule(pbi),
+    postFromModule(js),
+    postFromModule(useReport),
+    postFromModule(pnpmFilters),
+  ].filter((post) => post.published);
+
+  return posts;
 };

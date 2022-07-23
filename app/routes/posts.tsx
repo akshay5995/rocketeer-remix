@@ -1,5 +1,6 @@
 import styles from "highlight.js/styles/night-owl.css";
 import { Outlet } from "@remix-run/react";
+import { BreadCrumb } from "../components/BreadCrumb";
 
 export const links = () => {
   return [
