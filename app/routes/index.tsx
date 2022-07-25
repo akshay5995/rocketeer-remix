@@ -56,7 +56,7 @@ export default function Index() {
                 variant="gradient"
                 inherit
               >
-                Hi there 👋
+                Hola 👋
               </Text>
             </Title>
             <Image
