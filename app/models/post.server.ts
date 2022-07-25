@@ -24,13 +24,13 @@ const postFromModule = (mod: {
   };
 };
 
-export const getPosts = async (): Promise<Post[]> => {
+export const getPosts = async (showDrafts = false): Promise<Post[]> => {
   const posts = [
     postFromModule(pbi),
     postFromModule(js),
     postFromModule(useReport),
     postFromModule(pnpmFilters),
-  ].filter((post) => post.published);
+  ].filter((post) => showDrafts || post.published);
 
   return posts;
 };

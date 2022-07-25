@@ -1,17 +1,29 @@
 import { MetaFunction } from "@remix-run/node";
 import { useLoaderData, Link } from "@remix-run/react";
-import { Container, Title, Text, List, ThemeIcon, Paper } from "@mantine/core";
+import {
+  Container,
+  Title,
+  Text,
+  List,
+  ThemeIcon,
+  Paper,
+  Badge,
+} from "@mantine/core";
 import { LayersLinked } from "tabler-icons-react";
 import { json } from "@remix-run/node";
 import { getPosts, Post } from "~/models/post.server";
+import type { LoaderFunction } from "@remix-run/node";
 
 type LoaderData = {
   posts: Awaited<ReturnType<typeof getPosts>>;
 };
 
-export const loader = async () => {
+export const loader: LoaderFunction = async ({ request }) => {
+  const url = new URL(request.url);
+  const showDrafts = url.searchParams.get("draft") === "true";
+
   return json<LoaderData>({
-    posts: await getPosts(),
+    posts: await getPosts(showDrafts),
   });
 };
 
@@ -58,10 +70,9 @@ export default function Posts() {
                 weight="initial"
               >
                 {post.title}
+                {!post.published && <Badge mx="sm">Draft</Badge>}
               </Text>
-              <Text size="sm" weight="lighter">
-                {post.description}
-              </Text>
+              <Text size="sm">{post.description}</Text>
             </Paper>
           </List.Item>
         ))}

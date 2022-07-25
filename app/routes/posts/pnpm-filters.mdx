@@ -1,7 +1,7 @@
 ---
 meta:
   title: Monorepos and PNPM workspaces
-  description: pnpm workspaces provide a great way to manage your JS monorepo
+  description: pnpm workspaces provide a great way to manage your JS monorepo and optimize CI with very little effort just using it's built-in command line functions.
   published: false
 headers:
   Cache-Control: no-cache
@@ -9,8 +9,100 @@ headers:
 
 import { Header } from "../../components/Header";
 import { BreadCrumb } from "../../components/BreadCrumb";
-import { Image } from "@mantine/core";
+import { Image, Badge } from "@mantine/core";
 
 <BreadCrumb items={[{ name: "Posts", link: "/posts" }]} />
 
 <Header title={meta.title} />
+
+TL;DR; [pnpm workspaces](https://pnpm.io/workspaces) provide a great way to manage your JS monorepo and optimize CI with very little effort just using it's built-in command line functions.
+
+<Image
+  radius="md"
+  alt="pnpm workspace"
+  src="https://cdn-images-1.medium.com/max/1600/1*wcoX6BlOXmqSnJcGFrZ-2g.png"
+/>
+
+> Monolith vs Monorepo (And yes, it's blatant copy of Uncle Bob's [WFT per min](https://pics.me.me/a-representation-i-just-found-reading-clean-code-by-robert-71901439.png) analogy since it applies here too)
+
+## Monorepo vs Monolith
+
+A monorepo is a single repository containing multiple distinct projects, with well-defined relationships.
+Well, They're not Monoliths. Monoliths are many applications in a single repository with shared code scattered across the code base which creates havoc while scaling your team or application in terms of maintenance.
+Separation of Concerns is the key
+
+Key difference between Monorepo and Monolith is that Monorepos have well-defined relationships between the modules and shared code. Monorepos give you all the benefits of Monolith like code-colocation, discoverability without all the headaches of Monolith like poor DX, long lead times, flaky tests that's unrelated to your change breaking the CI.
+
+Well, that's the ideal scenario and only works when you have defined your relationships within the Monorepo well.
+
+> [PNPM](https://pnpm.io/motivation) - performant NPM (I'll not go into detail about why you should use pnpm but it's a package manager that's better than npm or yarn in terms of speed and security).
+
+It has few amazing tricks up its sleeve apart from being fast. We'll take a look at one of those tricks that can be used with your Monorepo called [pnpm workspaces](https://pnpm.io/workspaces).
+
+## Pnpm Workspaces
+
+This is what a well defined monorepo using pnpm and pnpm workspaces repo's folder structure would look like
+
+<Image
+  radius="md"
+  alt="folder structure"
+  src="https://cdn-images-1.medium.com/max/1600/1*QQ3uK10rY3y9AV3AFBcl1w.png"
+/>
+
+Your pnpm workspace file would look like
+
+<Image
+  radius="md"
+  alt="pnpm workspace"
+  src="https://cdn-images-1.medium.com/max/1600/1*4NGokQ_jEf5bfycR1ZBTOA.png"
+/>
+
+Now this helps you define your dependencies within the repository using the [workspace protocol](https://pnpm.io/workspaces#workspace-protocol-workspace).
+
+<Image
+  radius="md"
+  alt="pnpm dependencies"
+  src="https://cdn-images-1.medium.com/max/1600/1*z_pwTMULG2xzL1jLL12Pww.png"
+/>
+
+This will make your local development much faster as use can locally link your packages without having to build local dependencies in advance and point dependents to that build in your filesystem.
+
+And during you package release process i.e, pnpm publish will also dynamically replace the dependency versions [accordingly](https://pnpm.io/workspaces#publishing-workspace-packages). Pretty cool eh?
+
+## CI/CD optimization
+
+Now let's talk about optimization of CI/CD to save you time and resources in your Github workflows.
+
+Let's take a naive approach of building and testing hypothetical App 1 and App 2.
+
+<Image
+  radius="md"
+  alt="action example"
+  src="https://cdn-images-1.medium.com/max/1600/1*xMrxzw6daaA76HhG_350Mw.png"
+/>
+
+Say we change files related to App 1 and in the PR's CI runs a flaky test on App 2 fails. (We've all been there - an unrelated test failure breaking our pull request:/)
+
+<Image
+  radius="md"
+  alt="before"
+  src="https://cdn-images-1.medium.com/max/1600/1*SpOZhCuC9iSRuRxhXN82DA.png"
+/>
+
+_pnpm-filter_ command lets us use filter for only changed packages on the workspace and run a particular command for that package.
+
+<Image
+  radius="md"
+  alt="filter command"
+  src="https://cdn-images-1.medium.com/max/1600/1*GOeP57w0Z-pjYd3D8B20jg.png"
+/>
+
+So we can replace our _pnpm build:app1_ with `pnpm --filter "{apps/app-1}[origin/main]"`build to only run the build command if there's any change in App 1.
+
+If we do the same for test and build for App 2 respectively then even if there's a flaky test in App 2 it wouldn't interfere with your PR's CI in this case.
+
+<Image
+  radius="md"
+  alt="pnpm after"
+  src="https://cdn-images-1.medium.com/max/1600/1*x3si2rfC8PikaeSNQVOnYQ.png"
+/>
