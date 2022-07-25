@@ -2,6 +2,7 @@ import * as pbi from "../routes/posts/powerbi-report-component.mdx";
 import * as js from "../routes/posts/javascript.mdx";
 import * as useReport from "../routes/posts/use-report.mdx";
 import * as pnpmFilters from "../routes/posts/pnpm-filters.mdx";
+import invariant from "tiny-invariant";
 
 interface Meta {
   title: string;
@@ -24,13 +25,23 @@ const postFromModule = (mod: {
   };
 };
 
+const allPosts = [
+  postFromModule(pbi),
+  postFromModule(js),
+  postFromModule(useReport),
+  postFromModule(pnpmFilters),
+];
+
 export const getPosts = async (showDrafts = false): Promise<Post[]> => {
-  const posts = [
-    postFromModule(pbi),
-    postFromModule(js),
-    postFromModule(useReport),
-    postFromModule(pnpmFilters),
-  ].filter((post) => showDrafts || post.published);
+  const posts = allPosts.filter((post) => showDrafts || post.published);
 
   return posts;
+};
+
+export const getPost = async (slug: string): Promise<Post> => {
+  const post = allPosts.find((post) => post.slug === slug);
+
+  invariant(post, "Post not found!");
+
+  return post;
 };
