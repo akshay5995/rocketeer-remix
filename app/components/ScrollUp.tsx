@@ -10,6 +10,7 @@ export function ScrollUp() {
       <Transition transition="slide-up" mounted={scroll.y > 0}>
         {(transitionStyles) => (
           <Button
+            leftIcon={<ArrowNarrowUp size={16} />}
             style={transitionStyles}
             radius="md"
             compact

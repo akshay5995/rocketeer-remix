@@ -44,6 +44,7 @@ export const loader = async () => {
 
 export default function Index() {
   const { quote } = useLoaderData() as LoaderData;
+
   return (
     <div className="remix__page">
       <main>
