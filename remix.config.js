@@ -7,12 +7,16 @@ module.exports = {
   publicPath: "/build/",
   serverBuildDirectory: "server/build",
   mdx: async (filename) => {
-    const [rehypeHighlight, remarkToc] = await Promise.all([
-      import("rehype-highlight").then((mod) => mod.default),
-      import("remark-toc").then((mod) => mod.default),
-    ]);
+    const [rehypeSlug, rehypeAutolinkHeadings, rehypeHighlight, remarkToc] =
+      await Promise.all([
+        import("rehype-slug").then((mod) => mod.default),
+        import("rehype-autolink-headings").then((mod) => mod.default),
+        import("rehype-highlight").then((mod) => mod.default),
+        import("remark-toc").then((mod) => mod.default),
+      ]);
     return {
-      rehypePlugins: [rehypeHighlight, remarkToc],
+      rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings, rehypeHighlight],
+      remarkPlugins: [remarkToc],
     };
   },
 };
