@@ -8,6 +8,8 @@ import {
   ThemeIcon,
   Paper,
   Badge,
+  Group,
+  Stack,
 } from "@mantine/core";
 import { LayersLinked } from "tabler-icons-react";
 import { json } from "@remix-run/node";
@@ -16,6 +18,7 @@ import type { LoaderFunction } from "@remix-run/node";
 
 type LoaderData = {
   posts: Awaited<ReturnType<typeof getPosts>>;
+  showingDrafts: boolean;
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -24,6 +27,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   return json<LoaderData>({
     posts: await getPosts(showDrafts),
+    showingDrafts: showDrafts,
   });
 };
 
@@ -36,47 +40,44 @@ export let meta: MetaFunction = () => {
 };
 
 export default function Posts() {
-  const { posts } = useLoaderData();
+  const { posts, showingDrafts } = useLoaderData();
 
   return (
     <Container>
-      <Title order={3} p="lg">
-        <Text
-          gradient={{ from: "green", to: "cyan", deg: 2 }}
-          variant="gradient"
-          inherit
-        >
-          Posts
-        </Text>
-      </Title>
-      <List
-        icon={
-          <ThemeIcon color="teal" size={24} radius="xl">
-            <LayersLinked size={16} />
-          </ThemeIcon>
-        }
-        size="lg"
-        spacing="sm"
-        center
-        withPadding
-      >
+      <Group position="apart">
+        <Title order={3} p="lg">
+          <Text
+            gradient={{ from: "green", to: "cyan", deg: 2 }}
+            variant="gradient"
+            inherit
+          >
+            Posts
+          </Text>
+        </Title>
+        {!showingDrafts && (
+          <Text variant="link" size="xs" component={Link} to="?draft=true">
+            See drafts?
+          </Text>
+        )}
+      </Group>
+      <Stack spacing="sm">
         {posts.map((post: Post) => (
-          <List.Item key={post.slug}>
-            <Paper shadow="xl" radius="xl" p="lg">
-              <Text
-                variant="link"
-                component={Link}
-                to={post.slug}
-                weight="initial"
-              >
-                {post.title}
-                {!post.published && <Badge mx="sm">Draft</Badge>}
-              </Text>
-              <Text size="sm">{post.description}</Text>
-            </Paper>
-          </List.Item>
+          <Paper key={post.slug} withBorder radius="lg" p="lg">
+            <Text
+              variant="link"
+              component={Link}
+              to={post.slug}
+              weight="initial"
+            >
+              {post.title}
+              {!post.published && <Badge mx="sm">Draft</Badge>}
+            </Text>
+            <Text size="sm" weight="normal">
+              {post.description}
+            </Text>
+          </Paper>
         ))}
-      </List>
+      </Stack>
     </Container>
   );
 }

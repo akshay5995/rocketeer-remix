@@ -1,6 +1,6 @@
 import styles from "highlight.js/styles/night-owl.css";
 import { Outlet } from "@remix-run/react";
-import { ScrollUp } from "~/components/ScrollUp";
+import { ScrollUpButton } from "~/components/ScrollUpButton";
 
 export const links = () => {
   return [
@@ -15,7 +15,7 @@ export default function Posts() {
   return (
     <>
       <Outlet />
-      <ScrollUp />
+      <ScrollUpButton />
     </>
   );
 }

@@ -2,7 +2,7 @@ import { Affix, Transition, Button } from "@mantine/core";
 import { useWindowScroll } from "@mantine/hooks";
 import { ArrowNarrowUp } from "tabler-icons-react";
 
-export function ScrollUp() {
+export function ScrollUpButton() {
   const [scroll, scrollTo] = useWindowScroll();
 
   return (
@@ -15,6 +15,7 @@ export function ScrollUp() {
             radius="md"
             compact
             onClick={() => scrollTo({ y: 0 })}
+            variant="light"
           >
             Scroll to top
           </Button>
