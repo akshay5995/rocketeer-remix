@@ -4,10 +4,10 @@ import * as useReport from "../routes/posts/use-report.mdx";
 import * as pnpmFilters from "../routes/posts/pnpm-filters.mdx";
 import invariant from "tiny-invariant";
 
-interface Meta {
+export interface Meta {
   title: string;
   description: string;
-  data: string;
+  date: string;
   published: boolean;
 }
 

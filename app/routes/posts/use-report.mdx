@@ -9,7 +9,7 @@ Cache-Control: no-cache
 
 import { PostHeader } from "./components/PostHeader";
 
-<PostHeader title={meta.title} />
+<PostHeader {...meta} />
 
 This post covers how to embed your Microsoft PowerBi reports into your React application using _**useReport**_ hook from [powerbi-report-component](https://github.com/akshay5995/powerbi-report-component). I'll go into some depth of inner working of the package and rational behind `useReport`, and some thoughts on good API design libraries.
 
