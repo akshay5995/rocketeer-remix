@@ -5,7 +5,11 @@ import {
   Group,
   Center,
 } from "@mantine/core";
-import { BrandGithub, BrandLinkedin, BrandTwitter } from "tabler-icons-react";
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconBrandTwitter,
+} from "@tabler/icons";
 
 export function Footer() {
   return (
@@ -18,7 +22,7 @@ export function Footer() {
             referrerPolicy="no-referrer"
           >
             <ThemeIcon size="lg" variant="outline" radius="xl" color="teal">
-              <BrandGithub size={20} />
+              <IconBrandGithub size={20} />
             </ThemeIcon>
           </Anchor>
           <Anchor
@@ -27,7 +31,7 @@ export function Footer() {
             referrerPolicy="no-referrer"
           >
             <ThemeIcon size="lg" variant="outline" radius="xl" color="teal">
-              <BrandLinkedin size={20} />
+              <IconBrandLinkedin size={20} />
             </ThemeIcon>
           </Anchor>
           <Anchor
@@ -36,7 +40,7 @@ export function Footer() {
             referrerPolicy="no-referrer"
           >
             <ThemeIcon size="lg" radius="xl" color="teal" variant="outline">
-              <BrandTwitter size={20} />
+              <IconBrandTwitter size={20} />
             </ThemeIcon>
           </Anchor>
         </Group>

@@ -4,17 +4,16 @@ import {
   Container,
   Title,
   Text,
-  List,
-  ThemeIcon,
   Paper,
   Badge,
   Group,
   Stack,
+  Button,
 } from "@mantine/core";
-import { LayersLinked } from "tabler-icons-react";
 import { json } from "@remix-run/node";
 import { getPosts, Post } from "~/models/post.server";
 import type { LoaderFunction } from "@remix-run/node";
+import { IconEye } from "@tabler/icons";
 
 type LoaderData = {
   posts: Awaited<ReturnType<typeof getPosts>>;
@@ -55,9 +54,16 @@ export default function Posts() {
           </Text>
         </Title>
         {!showingDrafts && (
-          <Text variant="link" size="xs" component={Link} to="?draft=true">
+          <Button
+            leftIcon={<IconEye size={18} />}
+            variant="subtle"
+            size="xs"
+            component={Link}
+            to="?draft=true"
+            compact
+          >
             See drafts?
-          </Text>
+          </Button>
         )}
       </Group>
       <Stack spacing="sm">

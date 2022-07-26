@@ -3,7 +3,7 @@ import {
   ActionIcon,
   Tooltip,
 } from "@mantine/core";
-import { Copy, Check } from "tabler-icons-react";
+import { IconCopy, IconCheck } from "@tabler/icons";
 
 interface Props {
   content: string;
@@ -15,7 +15,7 @@ export function CopyButton({ content }: Props) {
       {({ copied, copy }) => (
         <Tooltip label={copied ? "Copied" : "Copy"} withArrow position="right">
           <ActionIcon color={copied ? "teal" : "gray"} onClick={copy}>
-            {copied ? <Check size={16} /> : <Copy size={16} />}
+            {copied ? <IconCheck size={16} /> : <IconCopy size={16} />}
           </ActionIcon>
         </Tooltip>
       )}

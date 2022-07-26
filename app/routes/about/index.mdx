@@ -9,13 +9,7 @@ import {
 } from "@mantine/core";
 
 import { Header } from "../../components/Header";
-import {
-  ReportMoney,
-  PlaneInflight,
-  Scooter,
-  DeviceMobileMessage,
-  Location,
-} from "tabler-icons-react";
+import { IconCash, IconPlane, IconMapPin, IconSend } from "@tabler/icons";
 
 <Header
   title="About Me"
@@ -40,7 +34,7 @@ Name of this site was inspired by one of my favourites by _Far East Movement_
 ## Experience 🥷
 
 <Timeline color="lime" active={0} bulletSize={30} lineWidth={1}>
-  <Timeline.Item bullet={<Scooter size={24} />} title="Glovo">
+  <Timeline.Item bullet={<IconMapPin size={24} />} title="Glovo">
     <Text color="dimmed" size="sm">
       📍 Barcelona, Spain
     </Text>
@@ -49,7 +43,7 @@ Name of this site was inspired by one of my favourites by _Far East Movement_
       April 2022 - Present
     </Text>
   </Timeline.Item>
-  <Timeline.Item bullet={<PlaneInflight size={24} />} title="Agoda">
+  <Timeline.Item bullet={<IconPlane size={24} />} title="Agoda">
     <Text color="dimmed" size="sm">
       Bangkok, Thailand
     </Text>
@@ -58,7 +52,7 @@ Name of this site was inspired by one of my favourites by _Far East Movement_
       September 2019 - April 2022
     </Text>
   </Timeline.Item>
-  <Timeline.Item bullet={<DeviceMobileMessage size={24} />} title="Unifize">
+  <Timeline.Item bullet={<IconSend size={24} />} title="Unifize">
     <Text color="dimmed" size="sm">
       Bangalore, India
     </Text>
@@ -67,7 +61,7 @@ Name of this site was inspired by one of my favourites by _Far East Movement_
       December 2018 - August 2019
     </Text>
   </Timeline.Item>
-  <Timeline.Item bullet={<ReportMoney size={24} />} title="Mr.Cooper">
+  <Timeline.Item bullet={<IconCash size={24} />} title="Mr.Cooper">
     <Text color="dimmed" size="sm">
       Chennai, India
     </Text>

@@ -1,6 +1,6 @@
 import { Affix, Transition, Button } from "@mantine/core";
 import { useWindowScroll } from "@mantine/hooks";
-import { ArrowNarrowUp } from "tabler-icons-react";
+import { IconArrowUp } from "@tabler/icons";
 
 export function ScrollUpButton() {
   const [scroll, scrollTo] = useWindowScroll();
@@ -10,7 +10,7 @@ export function ScrollUpButton() {
       <Transition transition="slide-up" mounted={scroll.y > 0}>
         {(transitionStyles) => (
           <Button
-            leftIcon={<ArrowNarrowUp size={16} />}
+            leftIcon={<IconArrowUp size={16} />}
             style={transitionStyles}
             radius="md"
             compact
