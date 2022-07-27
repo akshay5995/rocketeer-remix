@@ -6,32 +6,23 @@ import {
   Title,
   Timeline,
   ThemeIcon,
+  Mark,
+  Divider,
+  Stack,
 } from "@mantine/core";
 
-import { Header } from "../../components/Header";
+import { CollapsedContent } from "../../components/CollapsedContent";
 import { IconCash, IconPlane, IconMapPin, IconSend } from "@tabler/icons";
-
-<Header
-  title="About Me"
-  gradient={{ from: "white", to: "cyan", deg: 10 }}
-  order={1}
-/>
+import { SkillsSection } from "./components/SkillsSection";
 
 I'm a passionate software engineer with experience in developing products used by millions of customers around the world for various industry leaders.
 
-**Fun fact** 🎉
-
-Name of this site was inspired by one of my favourites by _Far East Movement_
-
-<iframe
-  src="https://open.spotify.com/embed/track/45sDIKapDyxPl307QpEAwl?utm_source=generator&theme=0"
-  width="100%"
-  height="80"
-  frameBorder="0"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-></iframe>
-
-## Experience 🥷
+<Divider
+  size="md"
+  my="lg"
+  labelPosition="center"
+  label={<Title order={4}>Experience</Title>}
+/>
 
 <Timeline color="lime" active={0} bulletSize={30} lineWidth={1}>
   <Timeline.Item bullet={<IconMapPin size={24} />} title="Glovo">
@@ -72,102 +63,11 @@ Name of this site was inspired by one of my favourites by _Far East Movement_
   </Timeline.Item>
 </Timeline>
 
-## Relavent skills ❤️
+<Divider
+  size="md"
+  my="lg"
+  labelPosition="center"
+  label={<Title order={4}>Skills</Title>}
+/>
 
-#### Languages
-
-<Group>
-  <Badge variant="gradient" gradient={{ from: "indigo", to: "cyan" }}>
-    Typescript
-  </Badge>
-  <Badge variant="gradient" gradient={{ from: "indigo", to: "cyan" }}>
-    Scala
-  </Badge>
-  <Badge variant="gradient" gradient={{ from: "indigo", to: "cyan" }}>
-    C#
-  </Badge>
-  <Badge variant="gradient" gradient={{ from: "indigo", to: "cyan" }}>
-    Java
-  </Badge>
-  <Badge variant="gradient" gradient={{ from: "indigo", to: "cyan" }}>
-    Clojure
-  </Badge>
-</Group>
-
-#### Frameworks and libraries
-
-<Group>
-  <Badge variant="gradient" gradient={{ from: "teal", to: "blue", deg: 60 }}>
-    React
-  </Badge>
-  <Badge variant="gradient" gradient={{ from: "teal", to: "blue", deg: 60 }}>
-    Vue
-  </Badge>
-  <Badge variant="gradient" gradient={{ from: "teal", to: "blue", deg: 60 }}>
-    Svelte
-  </Badge>
-  <Badge variant="gradient" gradient={{ from: "teal", to: "blue", deg: 60 }}>
-    Redux
-  </Badge>
-  <Badge variant="gradient" gradient={{ from: "teal", to: "blue", deg: 60 }}>
-    Express JS
-  </Badge>
-  <Badge variant="gradient" gradient={{ from: "teal", to: "blue", deg: 60 }}>
-    Akka Http
-  </Badge>
-  <Badge variant="gradient" gradient={{ from: "teal", to: "blue", deg: 60 }}>
-    Cypress
-  </Badge>
-  <Badge variant="gradient" gradient={{ from: "teal", to: "blue", deg: 60 }}>
-    Jest
-  </Badge>
-  <Badge variant="gradient" gradient={{ from: "teal", to: "blue", deg: 60 }}>
-    React testing library
-  </Badge>
-</Group>
-
-#### Devops tools
-
-<Group>
-  <Badge variant="gradient" gradient={{ from: "teal", to: "lime", deg: 105 }}>
-    Docker
-  </Badge>
-  <Badge variant="gradient" gradient={{ from: "teal", to: "lime", deg: 105 }}>
-    Kubernetes
-  </Badge>
-  <Badge variant="gradient" gradient={{ from: "teal", to: "lime", deg: 105 }}>
-    Github Actions
-  </Badge>
-  <Badge variant="gradient" gradient={{ from: "teal", to: "lime", deg: 105 }}>
-    Gitlab pipelines
-  </Badge>
-</Group>
-
-#### Cloud platforms
-
-<Group>
-  <Badge
-    variant="gradient"
-    gradient={{ from: "#ed6ea0", to: "#ec8c69", deg: 35 }}
-  >
-    AWS
-  </Badge>
-  <Badge
-    variant="gradient"
-    gradient={{ from: "#ed6ea0", to: "#ec8c69", deg: 35 }}
-  >
-    Heroku
-  </Badge>
-  <Badge
-    variant="gradient"
-    gradient={{ from: "#ed6ea0", to: "#ec8c69", deg: 35 }}
-  >
-    Vercel
-  </Badge>
-  <Badge
-    variant="gradient"
-    gradient={{ from: "#ed6ea0", to: "#ec8c69", deg: 35 }}
-  >
-    GCP
-  </Badge>
-</Group>
+<SkillsSection />

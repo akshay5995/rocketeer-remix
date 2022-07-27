@@ -11,6 +11,7 @@ import type { MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { json } from "@remix-run/node";
 import { getQuote } from "~/models/quote.server";
+import { CollapsedContent } from "~/components/CollapsedContent";
 
 export let meta: MetaFunction = () => {
   return {
@@ -74,6 +75,23 @@ export default function Index() {
             I love building things (🚀 🚀 🚀), dogs (🐶 🐶) and football (⚽).
           </Text>
           <Blockquote cite={`- ${quote.author}`}>{quote.content}</Blockquote>
+          <CollapsedContent
+            buttonText="Fun Fact 🎉"
+            variant="subtle"
+            withBorder
+          >
+            <Text variant="text" weight="normal" mb="lg">
+              Name of this site was inspired by one of my favourites by the band
+              Far East Movement
+            </Text>
+            <iframe
+              src="https://open.spotify.com/embed/track/45sDIKapDyxPl307QpEAwl?utm_source=generator&theme=0"
+              width="100%"
+              height="80"
+              frameBorder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            />
+          </CollapsedContent>
         </Stack>
       </main>
     </div>

@@ -1,5 +1,6 @@
 import { Outlet } from "@remix-run/react";
 import { MetaFunction } from "@remix-run/node";
+import { Header } from "~/components/Header";
 
 export let meta: MetaFunction = () => {
   return {
@@ -10,5 +11,14 @@ export let meta: MetaFunction = () => {
 };
 
 export default function Posts() {
-  return <Outlet />;
+  return (
+    <>
+      <Header
+        title="About Me"
+        gradient={{ from: "white", to: "cyan", deg: 10 }}
+        order={1}
+      />
+      <Outlet />
+    </>
+  );
 }
