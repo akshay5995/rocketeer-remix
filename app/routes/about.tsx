@@ -15,7 +15,7 @@ export default function Posts() {
     <>
       <Header
         title="About Me"
-        gradient={{ from: "white", to: "cyan", deg: 10 }}
+        gradient={{ from: "green", to: "cyan", deg: 10 }}
         order={1}
       />
       <Outlet />
