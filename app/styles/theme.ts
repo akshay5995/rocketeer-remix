@@ -1,8 +1,6 @@
-import type { MantineThemeOverride } from "@mantine/core";
+import type { ColorScheme, MantineThemeOverride } from "@mantine/core";
 
-const themeGenerator = (
-  colorScheme: "light" | "dark" = "dark"
-): MantineThemeOverride => ({
+const themeGenerator = (colorScheme: ColorScheme): MantineThemeOverride => ({
   colorScheme,
   breakpoints: {
     xs: 500,

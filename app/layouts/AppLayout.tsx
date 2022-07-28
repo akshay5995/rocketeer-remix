@@ -5,23 +5,28 @@ import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 
 interface Props {
-  toggleMode: () => void;
-  mode: ColorScheme;
+  toggleColorScheme: () => void;
+  colorScheme: ColorScheme;
   children: React.ReactNode;
 }
 
-export function Layout({ mode, toggleMode, children }: Props) {
+export function Layout({ colorScheme, toggleColorScheme, children }: Props) {
   return (
     <MantineProvider
       withGlobalStyles
       withNormalizeCSS
-      theme={themeGenerator(mode)}
+      theme={themeGenerator(colorScheme)}
     >
       <AppShell
         navbarOffsetBreakpoint="sm"
         asideOffsetBreakpoint="sm"
         fixed
-        header={<Header mode={mode} toggleMode={toggleMode} />}
+        header={
+          <Header
+            colorScheme={colorScheme}
+            toggleColorScheme={toggleColorScheme}
+          />
+        }
         footer={<Footer />}
       >
         <Container size={"sm"}>{children}</Container>

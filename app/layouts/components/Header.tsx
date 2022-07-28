@@ -5,11 +5,11 @@ import { ActionIcon } from "@mantine/core";
 import { IconBulb, IconBulbOff } from "@tabler/icons";
 
 interface Props {
-  toggleMode: () => void;
-  mode: ColorScheme;
+  toggleColorScheme: () => void;
+  colorScheme: ColorScheme;
 }
 
-export function Header({ mode, toggleMode }: Props) {
+export function Header({ colorScheme, toggleColorScheme }: Props) {
   return (
     <StyledHeader height={60} p="xs">
       <Group position="apart">
@@ -37,10 +37,10 @@ export function Header({ mode, toggleMode }: Props) {
           color="dark"
           radius="xl"
           size="xl"
-          onClick={toggleMode}
+          onClick={toggleColorScheme}
           variant="light"
         >
-          {mode === "light" ? <IconBulb /> : <IconBulbOff />}
+          {colorScheme === "light" ? <IconBulb /> : <IconBulbOff />}
         </ActionIcon>
       </Group>
     </StyledHeader>
