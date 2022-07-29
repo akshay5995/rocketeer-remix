@@ -34,13 +34,16 @@ export function Header({ colorScheme, toggleColorScheme }: Props) {
           </Text>
         </Group>
         <ActionIcon
-          color="dark"
           radius="xl"
           size="xl"
           onClick={toggleColorScheme}
           variant="light"
         >
-          {colorScheme === "light" ? <IconBulb /> : <IconBulbOff />}
+          {colorScheme === "light" ? (
+            <IconBulb color="black" fill="orange" />
+          ) : (
+            <IconBulbOff color="white" />
+          )}
         </ActionIcon>
       </Group>
     </StyledHeader>
