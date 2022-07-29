@@ -93,23 +93,6 @@ export function SkillsSection() {
 
       <Tabs.Panel value="devops" pl="xs">
         <Stack align="flex-start" spacing="sm">
-          <Badge variant="dot" color="teal">
-            AWS
-          </Badge>
-          <Badge variant="dot" color="teal">
-            Heroku
-          </Badge>
-          <Badge variant="dot" color="teal">
-            Vercel
-          </Badge>
-          <Badge variant="dot" color="teal">
-            GCP
-          </Badge>
-        </Stack>
-      </Tabs.Panel>
-
-      <Tabs.Panel value="cloud" pl="xs">
-        <Stack align="flex-start" spacing="sm">
           <Badge variant="dot" color="lime">
             Docker
           </Badge>
@@ -121,6 +104,23 @@ export function SkillsSection() {
           </Badge>
           <Badge variant="dot" color="lime">
             GL pipelines
+          </Badge>
+        </Stack>
+      </Tabs.Panel>
+
+      <Tabs.Panel value="cloud" pl="xs">
+        <Stack align="flex-start" spacing="sm">
+          <Badge variant="dot" color="teal">
+            AWS
+          </Badge>
+          <Badge variant="dot" color="teal">
+            Heroku
+          </Badge>
+          <Badge variant="dot" color="teal">
+            Vercel
+          </Badge>
+          <Badge variant="dot" color="teal">
+            GCP
           </Badge>
         </Stack>
       </Tabs.Panel>

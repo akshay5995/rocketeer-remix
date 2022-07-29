@@ -2,6 +2,7 @@ import * as pbi from "../routes/posts/powerbi-report-component.mdx";
 import * as js from "../routes/posts/javascript.mdx";
 import * as useReport from "../routes/posts/use-report.mdx";
 import * as pnpmFilters from "../routes/posts/pnpm-filters.mdx";
+import * as localstack from "../routes/posts/localstack.mdx";
 import invariant from "tiny-invariant";
 
 export interface Meta {
@@ -30,6 +31,7 @@ const allPosts = [
   postFromModule(js),
   postFromModule(useReport),
   postFromModule(pnpmFilters),
+  postFromModule(localstack),
 ];
 
 export const getPosts = async (showDrafts = false): Promise<Post[]> => {

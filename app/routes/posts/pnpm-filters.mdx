@@ -2,12 +2,12 @@
 meta:
   title: Monorepos and PNPM workspaces
   description: pnpm workspaces provide a great way to manage your JS monorepo and optimize CI with very little effort just using it's built-in command line functions.
-  published: false
+  published: true
 headers:
   Cache-Control: no-cache
 ---
 
-import { Image, Badge } from "@mantine/core";
+import { Image, Badge, AspectRatio } from "@mantine/core";
 import { PostHeader } from "./components/PostHeader";
 
 <PostHeader {...meta} />
@@ -17,6 +17,7 @@ TL;DR; [pnpm workspaces](https://pnpm.io/workspaces) provide a great way to mana
 <Image
   radius="md"
   alt="pnpm workspace"
+  caption="WTF / min"
   src="https://cdn-images-1.medium.com/max/1600/1*wcoX6BlOXmqSnJcGFrZ-2g.png"
 />
 
@@ -28,7 +29,7 @@ _Monolith vs Monorepo (And yes, it's blatant copy of Uncle Bob's [WFT per min](h
 
 A monorepo is a single repository containing multiple distinct projects, with well-defined relationships.
 Well, They're not Monoliths. Monoliths are many applications in a single repository with shared code scattered across the code base which creates havoc while scaling your team or application in terms of maintenance.
-Separation of Concerns is the key
+_Separation of Concerns_ is the key.
 
 Key difference between Monorepo and Monolith is that Monorepos have well-defined relationships between the modules and shared code. Monorepos give you all the benefits of Monolith like code-colocation, discoverability without all the headaches of Monolith like poor DX, long lead times, flaky tests that's unrelated to your change breaking the CI.
 
@@ -40,19 +41,21 @@ It has few amazing tricks up its sleeve apart from being fast. We'll take a look
 
 ## Pnpm Workspaces
 
-This is what a well defined monorepo using pnpm and pnpm workspaces repo's folder structure would look like:
+This is what a folder structure well defined monorepo using pnpm workspaceswould look like:
 
 <Image
   radius="md"
   alt="folder structure"
+  caption="folder structure"
   src="https://cdn-images-1.medium.com/max/1600/1*QQ3uK10rY3y9AV3AFBcl1w.png"
 />
 
-Your pnpm workspace file would look like:
+Your _pnpm workspace_ file would look like:
 
 <Image
   radius="md"
   alt="pnpm workspace"
+  caption="pnpm-workspace.yml"
   src="https://cdn-images-1.medium.com/max/1600/1*4NGokQ_jEf5bfycR1ZBTOA.png"
 />
 
@@ -60,11 +63,12 @@ Now this helps you define your dependencies within the repository using the [wor
 
 <Image
   radius="md"
+  caption="pnpm dependencies"
   alt="pnpm dependencies"
   src="https://cdn-images-1.medium.com/max/1600/1*z_pwTMULG2xzL1jLL12Pww.png"
 />
 
-This will make your local development much faster as use can locally link your packages without having to build local dependencies in advance and point dependents to that build in your filesystem.
+This will make your local development much faster as you can locally link your packages without having to build local dependencies in advance and point that dependents to that build in your filesystem.
 
 And during you package release process i.e, pnpm publish will also dynamically replace the dependency versions [accordingly](https://pnpm.io/workspaces#publishing-workspace-packages). Pretty cool eh?
 
@@ -77,6 +81,7 @@ Let's take a naive approach of building and testing hypothetical App 1 and App 2
 <Image
   radius="md"
   alt="action example"
+  caption="test.yaml"
   src="https://cdn-images-1.medium.com/max/1600/1*xMrxzw6daaA76HhG_350Mw.png"
 />
 
@@ -85,6 +90,7 @@ Say we change files related to App 1 and in the PR's CI runs a flaky test on App
 <Image
   radius="md"
   alt="before"
+  caption="before optimization"
   src="https://cdn-images-1.medium.com/max/1600/1*SpOZhCuC9iSRuRxhXN82DA.png"
 />
 
@@ -93,6 +99,7 @@ _pnpm-filter_ command lets us use filter for only changed packages on the worksp
 <Image
   radius="md"
   alt="filter command"
+  caption="filter command"
   src="https://cdn-images-1.medium.com/max/1600/1*GOeP57w0Z-pjYd3D8B20jg.png"
 />
 
@@ -109,15 +116,17 @@ If we do the same for test and build for App 2 respectively then even if there's
 <Image
   radius="md"
   alt="pnpm after"
+  caption="after optimiztion"
   src="https://cdn-images-1.medium.com/max/1600/1*x3si2rfC8PikaeSNQVOnYQ.png"
 />
 
-Say we go for an approach by usin [matrix](https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs) that runs these tests in parallel.
+Say we go for an approach by using a [matrix](https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs) that runs these tests in parallel.
 If one of them is flaky then you'll end up with a broken pipeline again.
 
 <Image
   radius="md"
-  alt="pnpm after"
+  alt="matrix"
+  caption="hardcoded matrix"
   src="https://cdn-images-1.medium.com/max/1600/1*JduzwNSq7RUy5tfS7xLoKw.png"
 />
 
@@ -132,6 +141,7 @@ We can use `jq` or node script to get these packages from the given json and set
 <Image
   radius="md"
   alt="pnpm after"
+  caption="matrix with optimization"
   src="https://cdn-images-1.medium.com/max/1600/1*RN129MRHd9Wi_naZxXn3yw.png"
 />
 
@@ -140,7 +150,13 @@ Hopefully, I've convinced you to try `pnpm filter` commands to optimize the CI o
 Having said that, there are other tools that help you manage and optimize your JS Monorepo for bigger scale like [NX](https://nx.dev/) or [Turborepo](https://turborepo.org/).
 Which help not only optimize your CI but also your dev experience (more on that later)
 
-This article was for people who don't have the luxury of adding more 3rd party tools or try use the most out the tools they're handed.
+This post was for people who don't have the luxury of adding more 3rd party tools or try use the most out the tools they're handed.
+
+Like a wise man once said,
+
+> **"Life is like an npm install - you never know what you are going to get."**
+
+(I think it was _forrest gump_ `¯\_(ツ)\_/¯`)
 
 Go check out [https://pnpm.io/filtering](https://pnpm.io/filtering) for more commands that can help you wrangle your monorepo better :)
 
