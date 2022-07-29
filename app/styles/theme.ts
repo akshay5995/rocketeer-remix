@@ -10,6 +10,7 @@ const themeGenerator = (colorScheme: ColorScheme): MantineThemeOverride => ({
     xl: 1400,
   },
   headings: { fontFamily: "Greycliff CF, sans-serif" },
+  primaryShade: { light: 9 },
 });
 
 export { themeGenerator };
