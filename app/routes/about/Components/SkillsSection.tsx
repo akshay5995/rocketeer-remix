@@ -13,6 +13,7 @@ export function SkillsSection() {
       radius="xl"
       orientation="vertical"
       defaultValue="languages"
+      variant="pills"
       my="lg"
     >
       <Tabs.List>
