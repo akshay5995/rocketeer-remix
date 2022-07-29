@@ -4,7 +4,7 @@ import { Document } from "./Document";
 import { useColorScheme } from "./hooks/useColorScheme";
 
 export default function App() {
-  const [colorScheme, toggleColorScheme] = useColorScheme("dark");
+  const [colorScheme, toggleColorScheme] = useColorScheme("light");
 
   return (
     <Document>

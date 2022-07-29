@@ -5,7 +5,7 @@ import { useColorScheme } from "./hooks/useColorScheme";
 import { Layout } from "./layouts/AppLayout";
 
 export function ErrorBoundary({ error }: { error: Error }) {
-  const [colorScheme, toggleColorScheme] = useColorScheme("dark");
+  const [colorScheme, toggleColorScheme] = useColorScheme("light");
 
   console.error(error);
   return (
