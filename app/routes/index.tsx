@@ -6,6 +6,7 @@ import {
   Image,
   Stack,
   Group,
+  HoverCard,
 } from "@mantine/core";
 import type { MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
@@ -60,38 +61,34 @@ export default function Index() {
                 Hola 👋
               </Text>
             </Title>
-            <Image
-              radius="xl"
-              width={200}
-              height={200}
-              src="/pic.jpeg"
-              alt="profile pic"
-            />
+            <HoverCard shadow="md">
+              <HoverCard.Target>
+                <Image
+                  radius="xl"
+                  width={200}
+                  height={200}
+                  src="/pic.jpeg"
+                  alt="profile pic"
+                />
+              </HoverCard.Target>
+              <HoverCard.Dropdown>
+                <Text size="sm">Yup, it's yours truly!</Text>
+              </HoverCard.Dropdown>
+            </HoverCard>
           </Group>
           <Title order={2}>
-            I'm <Mark>Akshay</Mark>
+            I'm <Mark>Akshay</Mark>,
           </Title>
           <Text weight={700}>
-            I love building things (🚀 🚀 🚀), dogs (🐶 🐶) and football (⚽).
+            A software developer who loves building things, dogs and football.
           </Text>
-          <Blockquote cite={`- ${quote.author}`}>{quote.content}</Blockquote>
-          <CollapsedContent
-            buttonText="Fun Fact 🎉"
-            variant="subtle"
-            withBorder
-          >
-            <Text variant="text" weight="normal" mb="lg">
-              Name of this site was inspired by one of my favourites by the band
-              Far East Movement
-            </Text>
-            <iframe
-              src="https://open.spotify.com/embed/track/45sDIKapDyxPl307QpEAwl?utm_source=generator&theme=0"
-              width="100%"
-              height="80"
-              frameBorder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            />
-          </CollapsedContent>
+          <Text variant="text" size="sm">
+            Welcome to my personal site and here's a random quote to inspire
+            you!
+          </Text>
+          <Blockquote color="lime" cite={`- ${quote.author}`}>
+            {quote.content}
+          </Blockquote>
         </Stack>
       </main>
     </div>
