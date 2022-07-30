@@ -72,9 +72,9 @@ This will make your local development much faster as you can locally link your p
 
 And during you package release process i.e, pnpm publish will also dynamically replace the dependency versions [accordingly](https://pnpm.io/workspaces#publishing-workspace-packages). Pretty cool eh?
 
-## CI/CD optimization
+## CI optimization
 
-Now let's talk about optimization of CI/CD to save you time and resources in your Github workflows.
+Now let's talk about optimization of CI to save you time and resources in your Github workflows.
 
 Let's take a naive approach of building and testing hypothetical App 1 and App 2.
 
@@ -136,7 +136,7 @@ If one of them is flaky then you'll end up with a broken pipeline again.
   > pnpm --filter "...[origin/main]" list --json --depth=1
 ```
 
-We can use `jq` or node script to get these packages from the given json and set them as inputs for our `matrix` so that we skip unecessary steps in our build.
+We can use `jq` or `node` script to get these packages from the given json and set them as inputs for our `matrix` so that we skip unecessary steps in our build.
 
 <Image
   radius="md"
