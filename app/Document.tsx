@@ -10,6 +10,7 @@ import {
 } from "@remix-run/react";
 import globalStylesUrl from "~/styles/global.css";
 import { json } from "@remix-run/node";
+import { StylesPlaceholder } from "@mantine/remix";
 
 export let links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: globalStylesUrl }];
@@ -32,8 +33,6 @@ export function Document({
 }) {
   const data = useLoaderData();
 
-  const params = JSON.stringify({ mode: data.mode });
-
   return (
     <html lang="en">
       <head>
@@ -46,15 +45,10 @@ export function Document({
           `,
           }}
         />
-        <script
-          type="application/javascript"
-          dangerouslySetInnerHTML={{
-            __html: `window.rocketeerParams=${params}`,
-          }}
-        />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         {title ? <title>{title}</title> : null}
+        <StylesPlaceholder />
         <Meta />
         <Links />
       </head>

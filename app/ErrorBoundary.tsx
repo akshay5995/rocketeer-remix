@@ -1,6 +1,4 @@
-import type { ColorScheme } from "@mantine/core";
 import { Links, Meta } from "@remix-run/react";
-import { useState } from "react";
 import { useColorScheme } from "./hooks/useColorScheme";
 import { Layout } from "./layouts/AppLayout";
 
